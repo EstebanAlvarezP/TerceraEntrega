@@ -20,7 +20,20 @@
             updateCart();
         }
 
-      
+        function saveCartToLocalStorage() {
+            localStorage.setItem('cart', JSON.stringify(cart));
+        }
+        
+
+        function loadCartFromLocalStorage() {
+            const savedCart = localStorage.getItem('cart');
+            if (savedCart) {
+                cart.length = 0; 
+                const parsedCart = JSON.parse(savedCart);
+                cart.push(...parsedCart);
+                updateCart();
+            }
+        }
         const clearCartButton = document.getElementById('clear-cart');
         clearCartButton.addEventListener('click', clearCart);
 
